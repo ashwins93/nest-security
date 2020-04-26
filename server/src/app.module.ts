@@ -4,6 +4,7 @@ import { UsersModule } from './users/users.module';
 import { SeedUserModule } from './seed-user/seed-user.module';
 import { SeedUserService } from './seed-user/seed-user.service';
 import { RolesModule } from './roles/roles.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,11 +21,12 @@ import { RolesModule } from './roles/roles.module';
     UsersModule,
     SeedUserModule,
     RolesModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule extends OnI {
+export class AppModule {
   constructor(private seedUser: SeedUserService) {
     this.seedUser.seed('sa@sa.com');
   }

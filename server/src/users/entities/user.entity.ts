@@ -4,6 +4,7 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  Index,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Auditable } from 'src/base/auditable.entity';
@@ -15,6 +16,7 @@ export class User extends Auditable {
   userId: number;
 
   @Column({ unique: true, nullable: false })
+  @Index()
   email: string;
 
   @Column()
@@ -22,6 +24,7 @@ export class User extends Auditable {
 
   @ManyToMany(() => Role, {
     cascade: true,
+    eager: true,
   })
   @JoinTable()
   roles: Role[];

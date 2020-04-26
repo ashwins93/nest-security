@@ -50,4 +50,12 @@ export class UsersService {
   async findUserCount(): Promise<number> {
     return this.usersRepository.count();
   }
+
+  async findUserByEmail(email: string): Promise<User | void> {
+    const user = await this.usersRepository.findOne({
+      email,
+    });
+
+    return user;
+  }
 }
