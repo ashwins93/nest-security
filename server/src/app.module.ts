@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { SeedUserModule } from './seed-user/seed-user.module';
+import { SeedUserService } from './seed-user/seed-user.service';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -15,8 +18,14 @@ import { UsersModule } from './users/users.module';
       autoLoadEntities: true,
     }),
     UsersModule,
+    SeedUserModule,
+    RolesModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule extends OnI {
+  constructor(private seedUser: SeedUserService) {
+    this.seedUser.seed('sa@sa.com');
+  }
+}
